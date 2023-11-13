@@ -9,11 +9,16 @@ const Contact = () => {
         <div className="content">
           <p>Stay up to date with the latest trends</p>
 
-          <form className="contact-form">
+          <form
+            className="contact-form"
+            action="https://formspree.io/f/mbjvelod"
+            method="POST"
+          >
             <input
               type="email"
               className="form-input"
               placeholder="enter email"
+              name="_replyto"
             />
             <button type="submit" className="submit-btn">
               Subscribe
