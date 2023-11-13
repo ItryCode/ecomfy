@@ -1,15 +1,41 @@
-import React from 'react'
-import styled from 'styled-components'
-import { services } from '../utils/constants'
+import React from "react";
+import styled from "styled-components";
+import { services } from "../utils/constants";
 
 const Services = () => {
-  return <h4>services </h4>
-}
+  return (
+    <Wrapper>
+      <div className="section-center">
+        <article className="header">
+          <h3>
+            Custom Products
+            <br /> catered to your tastes
+          </h3>
+          <p>
+            Products by you, for you.Check out our wide array of Services below
+          </p>
+        </article>
+        <div className="services-center">
+          {services.map((service) => {
+            const { id, icon, title, text } = service;
+            return (
+              <article key={id} className="service">
+                <span className="icon">{icon}</span>
+                <h4>{title}</h4>
+                <p>{text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   h3,
   h4 {
-    color: var(--clr-primary-1);
+    color: var(--main-clr);
   }
   padding: 5rem 0;
 
@@ -21,7 +47,7 @@ const Wrapper = styled.section`
   p {
     margin-bottom: 0;
     line-height: 1.8;
-    color: var(--clr-primary-3);
+    color: var(--main-clr);
   }
   .services-center {
     margin-top: 4rem;
@@ -46,7 +72,7 @@ const Wrapper = styled.section`
     margin-bottom: 1rem;
     border-radius: 50%;
     background: var(--clr-primary-10);
-    color: var(--clr-primary-1);
+    color: var(--main-clr);
     svg {
       font-size: 2rem;
     }
@@ -68,5 +94,5 @@ const Wrapper = styled.section`
       transform: translateY(5rem);
     }
   }
-`
-export default Services
+`;
+export default Services;
