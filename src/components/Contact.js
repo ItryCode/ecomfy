@@ -8,7 +8,6 @@ const Contact = () => {
         <h3>Join our newsletter and get 20% off</h3>
         <div className="content">
           <p>Stay up to date with the latest trends</p>
-
           <form
             className="contact-form"
             action="https://formspree.io/f/mbjvelod"
