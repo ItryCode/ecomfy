@@ -1,12 +1,35 @@
-import React from 'react'
-import styled from 'styled-components'
-import { formatPrice } from '../utils/helpers'
-import AmountButtons from './AmountButtons'
-import { FaTrash } from 'react-icons/fa'
-import { useCartContext } from '../context/cart_context'
-const CartItem = () => {
-  return <h4>cart item</h4>
-}
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import AmountButtons from "./AmountButtons";
+import { FaTrash } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
+const CartItem = ({ id, image, name, color, price, amount }) => {
+  const { removeItem, toggleAmount } = useCartContext();
+  const increase = () => {};
+  const decrease = () => {};
+  return (
+    <Wrapper>
+      <div className="title">
+        <img src={image} />
+        <p className="color">
+          color: <span style={{ background: color }}></span>
+        </p>
+        <h5 className="price-small">{formatPrice(price)}</h5>
+      </div>
+      <h5 className="price">{formatPrice(price)}</h5>
+      <AmountButtons amount={amount} increase={increase} decrease={decrease} />
+      <h5 className="subtotal">{formatPrice(price * amount)}</h5>
+      <button
+        type="button"
+        className="remove-btn"
+        onClick={() => removeItem(id)}
+      >
+        <FaTrash />
+      </button>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.article`
   .subtotal {
@@ -61,7 +84,7 @@ const Wrapper = styled.article`
     }
   }
   .price-small {
-    color: var(--clr-primary-5);
+    color: var(--sec-clr);
   }
   .amount-btns {
     width: 75px;
@@ -93,7 +116,7 @@ const Wrapper = styled.article`
     .subtotal {
       display: block;
       margin-bottom: 0;
-      color: var(--clr-grey-5);
+      color: var(--sec-clr);
       font-weight: 400;
       font-size: 1rem;
     }
@@ -103,7 +126,7 @@ const Wrapper = styled.article`
     .price {
       display: block;
       font-size: 1rem;
-      color: var(--clr-primary-5);
+      color: var(--sec-clr);
       font-weight: 400;
     }
     .name {
@@ -142,6 +165,6 @@ const Wrapper = styled.article`
       }
     }
   }
-`
+`;
 
-export default CartItem
+export default CartItem;
