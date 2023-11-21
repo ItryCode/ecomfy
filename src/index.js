@@ -21,6 +21,7 @@ root.render(
     authorizationParams={{
       redirect_uri: window.location.origin,
     }}
+    cacheLocation="localstorage"
   >
     <UserProvider>
       <ProductsProvider>
