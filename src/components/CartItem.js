@@ -15,13 +15,16 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
   return (
     <Wrapper>
       <div className="title">
-        <img src={image} />
-        <p className="color">
-          color: <span style={{ background: color }}></span>
-        </p>
-        <h5 className="price-small">{formatPrice(price)}</h5>
+        <img src={image} alt={name} />
+        <div>
+          <h5 className="name">{name}</h5>
+          <p className="color">
+            color: <span style={{ background: color }}></span>
+          </p>
+          <h5 className="price-small">{formatPrice(price)}</h5>
+        </div>
+        <h5 className="price">{formatPrice(price)}</h5>
       </div>
-      <h5 className="price">{formatPrice(price)}</h5>
       <AmountButtons amount={amount} increase={increase} decrease={decrease} />
       <h5 className="subtotal">{formatPrice(price * amount)}</h5>
       <button

@@ -49,7 +49,6 @@ const cart_reducer = (state, action) => {
 
   if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
     const { id, value } = action.payload;
-
     const tempCart = state.cart.map((item) => {
       if (item.id === id) {
         if (value === "inc") {
@@ -66,10 +65,9 @@ const cart_reducer = (state, action) => {
             newAmount = 1;
           }
           return { ...item, amount: newAmount };
-        } else {
-          return item;
         }
       }
+      return item;
     });
     return { ...state, cart: tempCart };
   }
@@ -77,6 +75,7 @@ const cart_reducer = (state, action) => {
   if (action.type === COUNT_CART_TOTALS) {
     const { total_items, total_amount } = state.cart.reduce(
       (total, cartItem) => {
+        console.log(state.cart);
         const { amount, price } = cartItem;
         total.total_items += amount;
         total.total_amount += price * amount;
