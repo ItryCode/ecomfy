@@ -27,7 +27,7 @@ const CheckoutPage = () => {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
 
   .empty {
     text-align: center;
