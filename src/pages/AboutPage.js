@@ -15,7 +15,13 @@ const AboutPage = () => {
             <h2>our story</h2>
             <div className="underline"></div>
           </div>
-          <p>Started from the bottom and we still going up!</p>
+          <p>
+            At Ecomfy, we believe that shopping should be more than just a
+            transaction; it should be an experience that leaves you thrilled and
+            satisfied. Our commitment is to provide you with a seamless,
+            enjoyable, and secure online shopping environment where you can
+            discover a world of premium products and exceptional deals.
+          </p>
         </article>
       </Wrapper>
     </main>
