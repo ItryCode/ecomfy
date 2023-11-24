@@ -27,7 +27,7 @@ function App() {
         <Sidebar />
 
         <Routes>
-          <Route exact path="/" element={<HomePage />}></Route>
+          <Route exact path="/" element={<HomePage />} />
           <Route exact path="/about" element={<AboutPage />} />
 
           <Route exact path="/cart" element={<CartPage />} />

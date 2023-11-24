@@ -18,15 +18,14 @@ const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const CheckoutForm = () => {
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
   const { myUser } = useUserContext();
-  const navigate = useNavigate();
-
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [client, setClientSecret] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const cardStyle = {
     style: {
@@ -48,11 +47,16 @@ const CheckoutForm = () => {
 
   const createPaymentIntent = async () => {
     try {
-      const data = await axios.post(
+      const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
         JSON.stringify({ cart, shipping_fee, total_amount })
       );
-    } catch (error) {}
+      console.log(data);
+      console.log(data.clientSecret);
+      setClientSecret(data.clientSecret);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   useEffect(() => {
@@ -60,12 +64,53 @@ const CheckoutForm = () => {
     //eslint-disable-next-line
   }, []);
 
-  const handleChange = async (event) => {};
+  const handleChange = async (event) => {
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : "");
+  };
 
-  const handleSubmit = async (ev) => {};
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    setProcessing(true);
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSucceeded(true);
+
+      setTimeout(() => {
+        clearCart();
+        navigate("/");
+      }, 7000);
+    }
+  };
 
   return (
     <div>
+      {succeeded ? (
+        <article>
+          <h4>Thank you</h4>
+          <h4>Your payment has been processed</h4>
+          <h4>Redirecting You back To Home page</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Hello, {myUser && myUser.name}</h4>
+          <p>
+            Your total is{" "}
+            <strong>{formatPrice(shipping_fee + total_amount)}</strong>
+          </p>
+          <p>Test Card Number :4242 4242 4242 4242</p>
+        </article>
+      )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
