@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import heroBcg from "../assets/hero-bcg.jpeg";
-import heroBcg2 from "../assets/hero-bcg-2.jpeg";
+import heroBcg from "../assets/hero-bcg.jpg";
+import heroBcg2 from "../assets/hero-bcg-2.jpg";
 
 const Hero = () => {
   return (
     <Wrapper className="section-center">
       <article className="content">
         <h1>Choose your comfort zone</h1>
-        <p>Pick and choose your favourite</p>
+        <p>
+          From everyday peripherals like keyboards, and mouses, to the more
+          sophisticated hardware like GPUs and RAMs, we have it all.
+        </p>
         <Link to="products" className="btn hero-btn">
           shop now
         </Link>
